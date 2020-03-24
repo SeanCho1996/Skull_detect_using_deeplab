@@ -10,8 +10,8 @@ Deeplab v3+相较于v3，主要的提升在于引入了类似U-Net的Encoder-Dec
 
 ## 数据库的建立
 * 1.解压后的生数据（训练+验证）储存在一个[整体的文件夹](https://drive.google.com/open?id=1rWuVtATwO_Oe8vPIXIbwIkIeaB84zZr3)中，运行`mk_train_data.py`可以自动把原图和标签图分开储存在`training_set`和`training_label`文件夹中，并生成标签的mask图像，最后生成训练及验证文件的索引txt，储存在`Segmentation`文件夹中。数据库中共有999张图片，我选择了899张做训练，其余的100张做验证。
-* 2.运行`remove_color_gt.py`文件将mask标签从24位转移到8位，并生成一个粗边框（这一步是对原deeplab原来的数据集pascal voc 2012做的，我们的数据集本身就是8位而且不需要粗边框），生成的文件保存在`SegmentationClassRaw`文件夹中。
-* 3.已有`training_set`, `Segmentation`以及`SegmentationClassRaw`后，就可以运行`build_skull_detect_data.py`将图像转译成tfrecord文件了，生成的文件在`tfrecord`文件夹中。
+* 2.运行`remove_gt_color.py`文件将mask标签从24位转移到8位，并生成一个粗边框（这一步是对原deeplab原来的数据集pascal voc 2012做的，我们的数据集本身就是8位而且不需要粗边框），生成的文件保存在`SegmentationClassRaw`文件夹中。
+* 3.已有`training_set`, `Segmentation`以及`SegmentationClassRaw`后，就可以运行`build_skull_data.py`将图像转译成tfrecord文件了，生成的文件在`tfrecord`文件夹中。
 
 ## 图像前处理
 在训练以前，deeplab允许先对图像做一个简单的预处理，即crop切割操作，原因是对于部分设备，若输入图像尺寸过大，显卡计算资源不足会导致训练无法开始，crop的意义在于从图像中随机切取一块指定大小的区域并只针对这一小块做训练，对于pascal voc 2012数据集，其中的图片本身尺寸都小于512x512，所以用默认的切割大小（513x513）就可以包含整张图片且不会超出显卡的内存上限。
