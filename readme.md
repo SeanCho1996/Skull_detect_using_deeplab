@@ -28,8 +28,10 @@ Deeplab v3+相较于v3，主要的提升在于引入了类似U-Net的Encoder-Dec
 <img src="https://i.ibb.co/SBtx15S/Snipaste-2020-03-25-07-39-58.jpg" alt="Snipaste-2020-03-25-07-39-58" border="0"></br>
 
 ## 提取模型并测试
-运行`export_model.py`（`x-export_model.bat`）即可导出训练好的模型，储存在`Xout`文件夹中，运行`x-final.py`允许读取这个模型并在一张测试图片上运行，得到的结果如下图所示</br>
-<img src="https://i.ibb.co/hVTtdyM/Figure-1.png" alt="Figure-1" border="0">
+运行`export_model.py`（`x-export_model.bat`）即可导出训练好的模型，储存在`Xout`文件夹中，运行`post_process.py`（`x-post_process.bat`）允许读取这个模型并在一张测试图片上运行，得到的结果如下图所示</br>
+<img src="https://i.ibb.co/hVTtdyM/Figure-1.png" alt="Figure-1" border="0"></br>
+
+`post_process.py`中引用了一些来自`x-final.py`文件中的操作，事实上`x-final.py`中的函数绝大多数是基于模型的运算，比如利用模型求出一张图片的预测(run_image函数），由标签图片生成合适显示的colormap（label_to_color_image函数）等，而`post_process.py`中的函数则是对生成图像的后处理，包括求形状轮廓，求mask的近似椭圆，求近似周长以及可视化等。
 
 ## 结果分析
 仅从分类性能来看，deeplab v3+在验证集的准确率还是非常高的，对于当前这个二分类的分割问题，总体的准确率可以达到95%</br>
