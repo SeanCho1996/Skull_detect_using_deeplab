@@ -41,4 +41,4 @@ Deeplab v3+相较于v3，主要的提升在于引入了类似U-Net的Encoder-Dec
 而且整体的运算速度也并不理想，对于简单的图片处理时间在30s左右，而相对比较复杂的图片则需要50s-60s
 
 ## 文件结构
-<img src="https://i.ibb.co/nfgfGkp/Snipaste-2020-03-29-00-18-07.jpg" alt="Snipaste-2020-03-29-00-18-07" border="0">
+<img src="https://i.ibb.co/ctyzkGh/Snipaste-2020-03-29-00-18-07-LI.jpg" alt="Snipaste-2020-03-29-00-18-07-LI" border="0">
