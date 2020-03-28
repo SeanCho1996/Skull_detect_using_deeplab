@@ -28,14 +28,17 @@ Deeplab v3+相较于v3，主要的提升在于引入了类似U-Net的Encoder-Dec
 <img src="https://i.ibb.co/SBtx15S/Snipaste-2020-03-25-07-39-58.jpg" alt="Snipaste-2020-03-25-07-39-58" border="0"></br>
 
 ## 提取模型并测试
-运行`export_model.py`（`x-export_model.bat`）即可导出训练好的模型，储存在`Xout`文件夹中，运行`post_process.py`（`x-post_process.bat`）允许读取这个模型并在一张测试图片上运行，得到的结果如下图所示</br>
-<img src="https://i.ibb.co/hVTtdyM/Figure-1.png" alt="Figure-1" border="0"></br>
+运行`export_model.py`（`x-export_model.bat`）即可导出训练好的[模型](https://drive.google.com/open?id=1aoTMrdQW2ogQ9hxaU0F1O9Fr0AlT4TWl)，储存在`Xout`文件夹中，运行`post_process.py`（`x-post_process.bat`）允许读取这个模型并在一张测试图片上运行，得到的结果如下图所示</br>
+<img src="https://i.ibb.co/zN9LXdG/Snipaste-2020-03-28-23-51-24.jpg" alt="Snipaste-2020-03-28-23-51-24" border="0"></br>
 
 `post_process.py`中引用了一些来自`x-final.py`文件中的操作，事实上`x-final.py`中的函数绝大多数是基于模型的运算，比如利用模型求出一张图片的预测(run_image函数），由标签图片生成合适显示的colormap（label_to_color_image函数）等，而`post_process.py`中的函数则是对生成图像的后处理，包括求形状轮廓，求mask的近似椭圆，求近似周长以及可视化等。
 
 ## 结果分析
-仅从分类性能来看，deeplab v3+在验证集的准确率还是非常高的，对于当前这个二分类的分割问题，总体的准确率可以达到95%</br>
+仅从分类性能来看，deeplab v3+在验证集的准确率还是非常高的，对于当前这个二分类的分割问题，总体的准确率可以达到95%，而且这只是在训练集上训练了1000个epoch的粗结果，如果增加训练数，理论上应该可以获得更好的结果。</br>
 <img src="https://i.ibb.co/XywDYP8/Snipaste-2020-03-27-16-11-51.jpg" alt="Snipaste-2020-03-27-16-11-51" border="0"></br>
 但是在测试更多图片后发现，对于目标边缘的噪声处理的仍然不好，如下图所示</br>
 <img src="https://i.ibb.co/SRZshLs/Figure-2.png" alt="Figure-2" border="0"></br>
 而且整体的运算速度也并不理想，对于简单的图片处理时间在30s左右，而相对比较复杂的图片则需要50s-60s
+
+## 文件结构
+<img src="https://i.ibb.co/nfgfGkp/Snipaste-2020-03-29-00-18-07.jpg" alt="Snipaste-2020-03-29-00-18-07" border="0">
