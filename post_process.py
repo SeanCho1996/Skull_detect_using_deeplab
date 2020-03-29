@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--image_name', type=str, help='image file name, xxx.png', default='111_HC.png')
 parser.add_argument('--file_path', type=str, help='directory of where image file is saved', default='datasets\\training_set\\')
-parser.add_argument('--csv_file_path', type=str, help='csv file path', default='HC_18_Challenge\\training_set_pixel_size_and_HC.csv')
+parser.add_argument('--csv_file_path', type=str, help='csv file path', default='datasets\\training_set_pixel_size_and_HC.csv')
 parser.add_argument('--compute_method', type=str, choices=['ellipse', 'direct'], help='method to compute circumference', default='ellipse')
 parser.add_argument('--visualization', type=bool, help='display circumference image or not', default=True)
 
@@ -99,7 +99,6 @@ if __name__ == "__main__":
         pos = np.array(np.where(res == TEST_IMAGE_NAME))[0][0]
         pix_length = res[pos][1].astype(np.float)
         ref_circumference = res[pos][2].astype(np.float)
-
 
     classed_img = x_final.run_image(TEST_IMAGE_PATH)
     classed_img = classed_img.astype(np.uint8)
